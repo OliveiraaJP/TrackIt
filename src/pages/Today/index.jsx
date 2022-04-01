@@ -1,7 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
+import dayjs from "dayjs";
 
-import {$main} from "./styles"
+import {$main, $date} from "./styles"
 
 import UserContext from "../../context/UserContext";
 import HabitsContext from "../../context/HabitsContext";
@@ -22,6 +23,10 @@ function Today() {
         },
     };
 
+    require("dayjs/locale/pt-br");
+	const date = dayjs().locale("pt-br").format("dddd, DD/MM");
+	const dayIndex = dayjs().day();
+
     useEffect(() => {
         const promise = axios.get(TODAY__API, config); // post? (url, body, config)
         promise.then((response) => {
@@ -37,6 +42,7 @@ function Today() {
         <>
             <Header />
             <$main>
+            <$date>{date}</$date>
                 {habitsData.length > 0 ? (
                     habitsData.map((habit, i) => {
                         return (
