@@ -30,6 +30,7 @@ function Login(){
             setUserData({image: data.image, token: data.token})
             navigate("/hoje")
         })
+        promise.catch(err => console.log("Ocorreu algum erro no login!"))
     }
     console.log(userData);
     console.log(email, password);

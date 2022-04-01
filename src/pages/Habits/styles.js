@@ -43,7 +43,6 @@ export const $navbar = styled.nav`
     }
 `;
 
-
 export const $containerHabit = styled.div`
     width: 340px;
     height: 180px;
@@ -52,28 +51,27 @@ export const $containerHabit = styled.div`
     padding: 19px;
     position: relative;
 
-    button{
+    button {
         width: 84px;
         height: 35px;
         border-radius: 4.63636px;
         text-align: center;
         border: none;
 
-        &.save{
-            background: #52B6FF;
-            color: #FFFFFF;
+        &.save {
+            background: #52b6ff;
+            color: #ffffff;
             position: absolute;
             bottom: 10px;
             right: 20px;
         }
 
-        &.cancel{
-            color: #52B6FF;
-            background: #FFFFFF;
+        &.cancel {
+            color: #52b6ff;
+            background: #ffffff;
             position: absolute;
             bottom: 10px;
             right: 130px;
-
         }
     }
 `;
@@ -100,20 +98,34 @@ export const $boxName = styled.input`
 
 export const $boxDays = styled.div`
     display: flex;
-    
+`;
 
-    div {
-        width: 30px;
-        height: 30px;
-        border: 1px solid #d5d5d5;
-        box-sizing: border-box;
-        border-radius: 5px;
-        text-align: center;
-        margin-right: 4px;
-        font-family: 'Lexend Deca';
-        
-        background: ${(props) => (props.enabled ? "#CFCFCF" : "#FFFFFF") };
-        color: ${(props) => (props.enabled ? "#FFFFFF" : "#DBDBDB")};
+export const $button = styled.button`
+    width: 30px;
+    height: 30px;
+    border: 1px solid #d5d5d5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    text-align: center;
+    margin-right: 4px;
+    font-family: "Lexend Deca";
+    background: ${(props) => (props.selecionado ? "#CFCFCF" : "#FFFFFF")};
+    color: ${(props) => (props.selecionado ? "#FFFFFF" : "#DBDBDB")};
+`;
 
+export const $getTodayBox = styled.div`
+    width: 340px;
+    height: 91px;
+    margin-bottom: 15px;
+
+    p {
+        max-width: 310px;
+        font-family: "Lexend Deca";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19.976px;
+        line-height: 25px;
+        color: #666666;
+        margin-bottom: 8px;
     }
 `;

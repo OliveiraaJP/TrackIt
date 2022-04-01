@@ -33,6 +33,7 @@ function Singup(){
             console.log(data);
             navigate("/")
         });
+        request.catch(err => console.log("deu erro no teu cadastro em, presta atenção"))
         
     }
 
