@@ -19,7 +19,7 @@ export const $container = styled.div`
         font-size: 18px;
         line-height: 22px;
         text-align: center;
-
         color: #52b6ff;
     }
+
 `;
