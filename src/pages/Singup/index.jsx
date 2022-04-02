@@ -33,7 +33,13 @@ function Singup(){
             console.log(data);
             navigate("/")
         });
-        request.catch(err => console.log("deu erro no teu cadastro em, presta atenção"))
+        request.catch(err => {
+            if(err.status === 409){
+                window.alert("Usuário e/ou email já registrado(s)")
+            } else {
+                window.alert("Por favor preencha corretamente o formulário")
+            }
+        })
         
     }
 

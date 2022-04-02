@@ -117,6 +117,7 @@ export const $getTodayBox = styled.div`
     width: 340px;
     height: 91px;
     margin-bottom: 15px;
+    position: relative;
 
     p {
         max-width: 310px;
@@ -127,5 +128,11 @@ export const $getTodayBox = styled.div`
         line-height: 25px;
         color: #666666;
         margin-bottom: 8px;
+    }
+
+    img{
+        position: absolute;
+        right: 10px;
+        top: 10px;
     }
 `;

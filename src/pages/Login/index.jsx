@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
+import { ThreeDots } from "react-loader-spinner";
 
 import UserContext from "../../context/UserContext";
 
@@ -30,7 +31,12 @@ function Login(){
             setUserData({image: data.image, token: data.token})
             navigate("/hoje")
         })
-        promise.catch(err => console.log("Ocorreu algum erro no login!"))
+        promise.catch(err => {
+                window.alert("Por favor preencha corretamente o formulário");
+                setPassword("")
+                setEmail("")
+            
+        })
     }
     console.log(userData);
     console.log(email, password);

@@ -7,6 +7,8 @@ import { ThreeDots } from "react-loader-spinner";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import garbageImage from "../../assets/garbage.png"
+
 
 import {
     $container,
@@ -25,10 +27,15 @@ function Habits() {
     const HABITS__API =
         "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
 
+    
+
     const [postName, setPostName] = useState("");
     const [postDays, setPostDays] = useState([]);
 
     const [allHabits, setAallHabits] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const[reloadPage, setReloadPage] = useState([])
+    const [toggleHabit, setToggleHabit] = useState(false)
 
     console.log(postName);
     console.log(habitsData);
@@ -53,6 +60,7 @@ function Habits() {
         request.catch((err) => {
             alert("Preencha os dados corretamente");
         });
+        request.finally(() => setReloadPage([...reloadPage, Math.random()]))
     }
 
     function handleDays(number) {
@@ -69,21 +77,6 @@ function Habits() {
     }
     console.log(postDays);
 
-    /* function noHabitText() {
-        if (allHabits.length > 0) {
-            allHabits.map((habitDay) => {
-                return (
-                    <$getTodayBox>
-                        {" "}
-                        <p>{habitDay.name}</p>{" "}
-                    </$getTodayBox>
-                );
-            });
-        } else {
-            return "Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!";
-        }
-    } */
-
     useEffect(() => {
         const promise = axios.get(HABITS__API, config);
         promise.then((response) => {
@@ -91,9 +84,29 @@ function Habits() {
             setAallHabits(response.data);
         });
         promise.catch((err) => console.log(err));
-    }, []);
+
+        promise.finally(() => setIsLoaded(true));
+    }, [reloadPage]);
 
     console.log(allHabits);
+
+    const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"]
+
+    function deleteHabit(id){
+        const DELETE__API =
+        `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`
+
+        const request = axios.delete(DELETE__API, config)
+        request.then(response => console.log(response))
+        request.catch(err => console.log(err.response))
+        request.finally(() => setReloadPage([...reloadPage, id]))
+    }
+
+    function toggleBoxHabit(){
+        setToggleHabit(!toggleHabit)
+        console.log(toggleHabit);
+    }
+
 
     return (
         <>
@@ -101,72 +114,64 @@ function Habits() {
             <$container>
                 <$navbar>
                     <p>Meus hábitos</p>
-                    <button> + </button>
+                    <button onClick={() => toggleBoxHabit()}> + </button>
                 </$navbar>
+                {toggleHabit && (
                 <$containerHabit>
                     <$boxName
                         placeholder="nome do hábito"
+                        value={postName}
                         onChange={(e) => setPostName(e.target.value)}
                     />
                     <$boxDays>
-                        <$button
-                            selecionado={postDays.includes(7)}
-                            onClick={() => handleDays(7)}
-                        >
-                            D
-                        </$button>
-                        <$button
-                            selecionado={postDays.includes(1)}
-                            onClick={() => handleDays(1)}
-                        >
-                            S
-                        </$button>
-                        <$button
-                            selecionado={postDays.includes(2)}
-                            onClick={() => handleDays(2)}
-                        >
-                            T
-                        </$button>
-                        <$button
-                            selecionado={postDays.includes(3)}
-                            onClick={() => handleDays(3)}
-                        >
-                            Q
-                        </$button>
-                        <$button
-                            selecionado={postDays.includes(4)}
-                            onClick={() => handleDays(4)}
-                        >
-                            Q
-                        </$button>
-                        <$button
-                            selecionado={postDays.includes(5)}
-                            onClick={() => handleDays(5)}
-                        >
-                            S
-                        </$button>
-                        <$button
-                            selecionado={postDays.includes(6)}
-                            onClick={() => handleDays(6)}
-                        >
-                            S
-                        </$button>
+                        {["D", "S", "T", "Q", "Q", "S", "S"].map(
+                            (day, index) => (
+                                <$button
+                                    key={index}
+                                    selecionado={postDays.includes(index)}
+                                    onClick={() => handleDays(index)}
+                                >
+                                    {day}
+                                </$button>
+                            )
+                        )}
                     </$boxDays>
                     <button className="cancel"> Cancelar </button>
                     <button className="save" onClick={postHabitAPI}>
                         Salvar
                     </button>
                 </$containerHabit>
+                )}
 
-                <p>
-                    {allHabits.length === 0
-                        ? "oi"
-                        : allHabits.map((habitDay) => {
-                            return (
-                                <$getTodayBox>{habitDay.name}</$getTodayBox>
-                                )
-                        })}
-                </p>
+                <div>
+                    {!isLoaded && "carregando"}
+                    {isLoaded &&
+                        (
+                            allHabits.length === 0
+                                ? "Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!"
+                                : allHabits.map((habitDay, i) => {
+                                    return (
+                                        <span key={i}>
+                                        <$getTodayBox key={i+100}>
+                                            <p>{habitDay.name}</p>
+                                        <$boxDays>
+                                        {weekdays.map((weekday, i) => {
+                                            return i === habitDay.days ? (
+                                                <$button  selecionado>{weekday}</$button>
+                                                ) : (
+                                                <$button >{weekday}</$button>
+                                                )
+                                            })}
+                                        </$boxDays>
+                                        <img src={garbageImage} alt="garbage icon" onClick={() => deleteHabit(habitDay.id)}/>
+                                        </$getTodayBox>
+                                        </span>
+                                    );
+                                }
+                            )
+                        )
+                    }
+                </div>
             </$container>
             <Footer />
         </>
