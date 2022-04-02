@@ -10,16 +10,13 @@ function TodayHabitBox({
     sequenceCount,
     recordCount,
     isDone = false,
-    
+    toggleDoneHabit
 }) {
 
     const {userData} = useContext(UserContext)
     const{habitsData} = useContext(HabitsContext)
 
-    function toggleDoneHabit (){
-        console.log(userData);
-        console.log(habitsData);
-    }
+    
 
 
     return (

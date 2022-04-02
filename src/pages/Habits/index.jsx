@@ -206,7 +206,7 @@ function Habits() {
                                             <p>{habitDay.name}</p>
                                         <$boxDays>
                                         {weekdays.map((weekday, i) => {
-                                            return i === habitDay.days ? (
+                                            return /[0-6]/ === habitDay.days[i] ? (
                                                 <$button  selecionado>{weekday}</$button>
                                                 ) : (
                                                 <$button >{weekday}</$button>

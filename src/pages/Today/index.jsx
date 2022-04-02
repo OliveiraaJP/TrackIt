@@ -38,21 +38,29 @@ function Today() {
 
     console.log(habitsData);
 
+    function toggleHabit(id){
+        console.log(id);
+    }
+
     return (
         <>
             <Header />
             <$main>
-            <$date>{date}</$date>
+            <$date>
+            {date}
+            <p>Nenhum hábito concluído ainda</p>
+            </$date>
                 {habitsData.length > 0 ? (
                     habitsData.map((habit, i) => {
                         return (
-                            <TodayHabitBox
-                                key={i}
-                                titleHabit={habit.name}
-                                sequenceCount={habit.currentSequence}
-                                recordCount={habit.highestSequence}
-                                isDone
-                            />
+                                <TodayHabitBox
+                                    toggleDoneHabit={() => toggleHabit(habit.id)}
+                                    key={i}
+                                    titleHabit={habit.name}
+                                    sequenceCount={habit.currentSequence}
+                                    recordCount={habit.highestSequence}                                
+                                    isDone
+                                />
                         );
                     })
                 ) : (

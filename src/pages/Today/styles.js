@@ -13,4 +13,15 @@ export const $date = styled.h1`
     font-size: 23px;
     color: #126ba5;
     margin-top: 20px;
+    margin-bottom: 30px;
+
+    p {
+        font-family: "Lexend Deca";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17.976px;
+        line-height: 22px;
+
+        color: #bababa;
+    }
 `;
