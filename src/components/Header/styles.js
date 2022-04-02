@@ -6,6 +6,7 @@ export const $container = styled.div`
     height: 70px;
     left: 0px;
     top: 0px;
+    z-index: 1;
 
     display: flex;
     justify-content: space-between;

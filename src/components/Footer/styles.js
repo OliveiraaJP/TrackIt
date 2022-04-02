@@ -7,7 +7,7 @@ export const $container = styled.div`
     left: 0px;
     bottom: 0;
     background-color: #FFFFFF;
-
+    z-index: 1;
     display: flex;
     justify-content: space-around;
     align-items: center;

@@ -18,7 +18,7 @@ export const $navbar = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
 
     p {
         font-family: "Lexend Deca";
@@ -56,23 +56,48 @@ export const $containerHabit = styled.div`
         height: 35px;
         border-radius: 4.63636px;
         text-align: center;
-        border: none;
+        border: none;   
 
         &.save {
-            background: #52b6ff;
-            color: #ffffff;
-            position: absolute;
-            bottom: 10px;
-            right: 20px;
-        }
+        background: #52b6ff;
+        color: #ffffff;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+    }
 
-        &.cancel {
-            color: #52b6ff;
-            background: #ffffff;
-            position: absolute;
-            bottom: 10px;
-            right: 130px;
-        }
+    &.cancel {
+        color: #52b6ff;
+        background: #ffffff;
+        position: absolute;
+        bottom: 10px;
+        right: 130px;
+    }
+
+    &.loadSave {
+        background: #52b6ff;
+        color: #ffffff;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        opacity: 0.7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.loadCancel {
+        color: #52b6ff;
+        background: #ffffff;
+        position: absolute;
+        bottom: 10px;
+        right: 130px;
+        opacity: 0.7;
+    }
+
+
+
+
     }
 `;
 
@@ -94,6 +119,13 @@ export const $boxName = styled.input`
         line-height: 25px;
         color: #dbdbdb;
     }
+
+    &.load{
+
+        &::placeholder{
+            color: #B3B3B3;
+        }
+    }
 `;
 
 export const $boxDays = styled.div`
@@ -111,10 +143,18 @@ export const $button = styled.button`
     font-family: "Lexend Deca";
     background: ${(props) => (props.selecionado ? "#CFCFCF" : "#FFFFFF")};
     color: ${(props) => (props.selecionado ? "#FFFFFF" : "#DBDBDB")};
+
+    &.load{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.7;
+    }
 `;
 
 export const $getTodayBox = styled.div`
-    width: 340px;
+    margin: 0 20px;
+    width: 310px;
     height: 91px;
     margin-bottom: 15px;
     position: relative;
@@ -136,3 +176,10 @@ export const $getTodayBox = styled.div`
         top: 10px;
     }
 `;
+
+export const $loadHabit = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+`
+

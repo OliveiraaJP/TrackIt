@@ -53,6 +53,13 @@ margin: auto;
                     color: #DBDBDB;
                     font-size: 20px;
                 }
+
+                &.load{
+                    &::placeholder{
+                    color: #AFAFAF;
+                    font-size: 20px;
+                }
+                }
             }
 
             button{
@@ -66,6 +73,13 @@ margin: auto;
                 color: #FFFFFF;
                 font-size: 21px;
                 line-height: 26px;
+
+                &.load{
+                    opacity: 0.7;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
             }        
     }
 `

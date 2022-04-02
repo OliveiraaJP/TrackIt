@@ -54,8 +54,13 @@ margin: auto;
                     color: #DBDBDB;
                     font-size: 20px;
                 }
+
+                &.load{
+                    color: #AFAFAF;
+                }
             }
             
+
 
             button{
                 width: 303px;
@@ -68,6 +73,14 @@ margin: auto;
                 color: #FFFFFF;
                 font-size: 21px;
                 line-height: 26px;
+
+                &.load{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #52B6FF;
+                    opacity: 0.7;
+                }
             }
     }
 

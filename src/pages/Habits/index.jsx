@@ -3,7 +3,8 @@ import { useState, useContext, useEffect } from "react";
 import UserContext from "../../context/UserContext";
 import HabitsContext from "../../context/HabitsContext";
 import axios from "axios";
-import { ThreeDots } from "react-loader-spinner";
+
+import { ThreeDots, Oval } from "react-loader-spinner";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -18,6 +19,7 @@ import {
     $boxDays,
     $button,
     $getTodayBox,
+    $loadHabit
 } from "./styles";
 
 function Habits() {
@@ -36,6 +38,7 @@ function Habits() {
     const [isLoaded, setIsLoaded] = useState(false);
     const[reloadPage, setReloadPage] = useState([])
     const [toggleHabit, setToggleHabit] = useState(false)
+    const [sendHabitCooldown, setSendHabitCooldown] = useState(true)
 
     console.log(postName);
     console.log(habitsData);
@@ -50,6 +53,7 @@ function Habits() {
             name: postName,
             days: postDays,
         };
+        setSendHabitCooldown(!sendHabitCooldown)
 
         const request = axios.post(HABITS__API, body, config);
         request.then((response) => {
@@ -60,7 +64,12 @@ function Habits() {
         request.catch((err) => {
             alert("Preencha os dados corretamente");
         });
-        request.finally(() => setReloadPage([...reloadPage, Math.random()]))
+        request.finally(() => {
+            setReloadPage([...reloadPage, Math.random()]);
+            toggleBoxHabit()
+            
+            }
+        )
     }
 
     function handleDays(number) {
@@ -86,6 +95,7 @@ function Habits() {
         promise.catch((err) => console.log(err));
 
         promise.finally(() => setIsLoaded(true));
+        setSendHabitCooldown(!sendHabitCooldown)
     }, [reloadPage]);
 
     console.log(allHabits);
@@ -93,6 +103,9 @@ function Habits() {
     const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"]
 
     function deleteHabit(id){
+        const boolean = window.confirm("Gostaria de apagar esse hábito")
+        if(!boolean) return
+
         const DELETE__API =
         `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`
 
@@ -116,7 +129,7 @@ function Habits() {
                     <p>Meus hábitos</p>
                     <button onClick={() => toggleBoxHabit()}> + </button>
                 </$navbar>
-                {toggleHabit && (
+                {toggleHabit && !sendHabitCooldown &&(
                 <$containerHabit>
                     <$boxName
                         placeholder="nome do hábito"
@@ -136,15 +149,52 @@ function Habits() {
                             )
                         )}
                     </$boxDays>
-                    <button className="cancel"> Cancelar </button>
+                    <button className="cancel" onClick={() => toggleBoxHabit()}> Cancelar </button>
                     <button className="save" onClick={postHabitAPI}>
                         Salvar
                     </button>
                 </$containerHabit>
                 )}
 
+                {toggleHabit && sendHabitCooldown && (
+                <$containerHabit>
+                    <$boxName
+                        placeholder="nome do hábito"
+                        value={postName}
+                        onChange={(e) => setPostName(e.target.value)}
+                    />
+                    <$boxDays>
+                        {["D", "S", "T", "Q", "Q", "S", "S"].map(
+                            (day, index) => (
+                                <$button
+                                    key={index}
+                                    selecionado={postDays.includes(index)}
+                                    onClick={() => handleDays(index)}
+                                >
+                                    {day}
+                                </$button>
+                            )
+                        )}
+                    </$boxDays>
+                    <button disabled className="loadCancel"> Cancelar </button>
+                    <button  disabled className="loadSave">
+                        <ThreeDots color="#fff" height="40" width="40" />
+                    </button>
+                </$containerHabit>
+                )}
+
+                
+
                 <div>
-                    {!isLoaded && "carregando"}
+                    {!isLoaded && <$loadHabit>
+                                        <Oval 
+                                        strokeWidth={2} 
+                                        color="#00BFFF" 
+                                        secondaryColor="#126BA5" 
+                                        height={300} 
+                                        width={300} 
+                                        />
+                                    </$loadHabit>}
                     {isLoaded &&
                         (
                             allHabits.length === 0
