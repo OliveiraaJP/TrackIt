@@ -57,7 +57,7 @@ function Singup(){
             <input type="email" value={email} placeholder = "email" onChange={e => setEmail(e.target.value)} required/>
             <input type= "password" value={password} placeholder="password" onChange={e => setPassword(e.target.value)} required/>
             <input type= "text" value={name} placeholder="nome" onChange={e => setName(e.target.value)} required/>
-            <input type= "text" value={image} placeholder="foto" onChange={e => setImage(e.target.value)} required/>
+            <input type= "url" value={image} placeholder="foto" onChange={e => setImage(e.target.value)} required/>
             <button type="submit"> Cadastrar </button>
         </form>
         )}

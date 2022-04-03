@@ -42,15 +42,11 @@ function Today() {
             setHabitsData(data);
             setCountData(data.filter((habit) => habit.done).length); 
             setPercentageData(data.filter((habit) => habit.done).length / data.length)
-            
-            
         });
         promise.catch((err) => console.log(err.response));
+        
     }, [userData, reloadPage]);
 
-    console.log(habitsData);
-    console.log(countData + " countData");
-    console.log((percentageData * 100) + " percentageData");
 
     
 
