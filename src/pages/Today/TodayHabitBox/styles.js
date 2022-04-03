@@ -8,7 +8,6 @@ export const $container = styled.div`
     margin-bottom: 10px;
     display: flex;
     padding: 13px;
-   
 `;
 
 export const $texts = styled.div`

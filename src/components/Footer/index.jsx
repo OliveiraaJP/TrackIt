@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
 
+
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { $container } from "./styles";
+import { useContext } from "react";
+import CountContext from "../../context/CountContext";
 
 function Footer() {
-    const percentage = 60;
+
+    const {percentageData} = useContext(CountContext)
+
+    const percentage = parseInt(percentageData * 100);
 
     return (
         <$container>

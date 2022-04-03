@@ -30,7 +30,7 @@ function Login(){
         const promise = axios.post(LOGIN__API, body);
         promise.then(response => {
             const {data} = response;
-            console.log(data);
+
             setUserData({image: data.image, token: data.token})
             navigate("/hoje")
         })
@@ -42,8 +42,7 @@ function Login(){
             
         })
     }
-    console.log(userData);
-    console.log(email, password);
+
 
 
     return(

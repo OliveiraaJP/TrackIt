@@ -16,7 +16,7 @@ function Singup(){
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false)
 
-    console.log(email, name, image, password);
+
 
     function singup(event){
         event.preventDefault()
@@ -32,7 +32,6 @@ function Singup(){
         const request = axios.post(URL_API, body);
         request.then(promise => {
             const {data} = promise;
-            console.log(data);
             navigate("/")
             
         });

@@ -21,7 +21,10 @@ export const $date = styled.h1`
         font-weight: 400;
         font-size: 17.976px;
         line-height: 22px;
-
         color: #bababa;
+
+        &.green{
+            color: #8FC549;
+        }
     }
 `;

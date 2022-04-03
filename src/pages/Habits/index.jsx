@@ -136,7 +136,7 @@ function Habits() {
                         value={postName}
                         onChange={(e) => setPostName(e.target.value)}
                     />
-                    <$boxDays>
+                    <$boxDays key={Math.random()}>
                         {["D", "S", "T", "Q", "Q", "S", "S"].map(
                             (day, index) => (
                                 <$button
@@ -159,6 +159,7 @@ function Habits() {
                 {toggleHabit && sendHabitCooldown && (
                 <$containerHabit>
                     <$boxName
+                    
                         placeholder="nome do hábito"
                         value={postName}
                         onChange={(e) => setPostName(e.target.value)}
@@ -207,9 +208,9 @@ function Habits() {
                                         <$boxDays>
                                         {weekdays.map((weekday, i) => {
                                             return /[0-6]/ === habitDay.days[i] ? (
-                                                <$button  selecionado>{weekday}</$button>
+                                                <$button key={i} selecionado>{weekday}</$button>
                                                 ) : (
-                                                <$button >{weekday}</$button>
+                                                <$button key={i} >{weekday}</$button>
                                                 )
                                             })}
                                         </$boxDays>

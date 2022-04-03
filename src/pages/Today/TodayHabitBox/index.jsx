@@ -25,10 +25,11 @@ function TodayHabitBox({
                 <h1>{titleHabit}</h1>
 
                 <h2>
-                    Sequencia atual: <span>{sequenceCount} dias</span>{" "}
+                    Sequencia atual: <span>{sequenceCount} dias</span>
                 </h2>
-
-                <h2> Seu recorde: {recordCount} dias</h2>
+            {sequenceCount === recordCount && sequenceCount !== 0 && (<h2> Seu recorde: <span>{recordCount} dias</span></h2>)}
+            {sequenceCount !== recordCount && (<h2> Seu recorde: {recordCount} dias </h2>)}
+            {sequenceCount ===0 && recordCount === 0 && (<h2> Seu recorde: {recordCount} dias </h2>)}
             </$texts>
 
             <BsCheckSquareFill
