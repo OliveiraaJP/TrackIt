@@ -38,10 +38,10 @@ function Singup(){
         request.catch(err => {
             if(err.status === 409){
                 window.alert("Usuário e/ou email já registrado(s)")
-                setLoading(!loading)
+                setLoading(false)
             } else {
                 window.alert("Por favor preencha corretamente o formulário")
-                setLoading(!loading)
+                setLoading(false)
             }
         })
         

@@ -35,14 +35,13 @@ function Login(){
             navigate("/hoje")
         })
         promise.catch(err => {
-                window.alert("Por favor preencha corretamente o formulário");
+                setIsLoaded(false)
                 setPassword("")
                 setEmail("")
-                setIsLoaded(!isLoaded)
-            
-        })
+                window.alert("Por favor preencha corretamente o formulário");
+        
+            })
     }
-
 
 
     return(
