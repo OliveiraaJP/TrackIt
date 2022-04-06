@@ -76,7 +76,7 @@ function Habits() {
         if (postDays.includes(number)) {
             const newArray = postDays.filter((el) => {
                 if (number !== el) {
-                    return el;
+                    return true;
                 }
             });
             setPostDays(newArray);
@@ -196,6 +196,8 @@ function Habits() {
                                         width={300} 
                                         />
                                     </$loadHabit>}
+
+
                     {isLoaded &&
                         (
                             allHabits.length === 0
